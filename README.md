@@ -1,6 +1,6 @@
 ## Oracle JDK and OpenJDK based on CentOS:7
 
-This is docker container based on CentOS 7 and contains Oracle JDK and OpenJDK. 
+This is docker image provides Oracle JDK and OpenJDK. 
 
 **Using the image, you accept the [Oracle Binary Code License Agreement](http://www.oracle.com/technetwork/java/javase/terms/license/index.html) for Java SE!!!**
 
@@ -8,7 +8,7 @@ This is docker container based on CentOS 7 and contains Oracle JDK and OpenJDK.
 
 Run container with Oracle JDK
 ```bash
-docker run -it --rm -e JDK_IMPLEMENTATION=ORACLEJDK spalarus/centos-jdk-hybrid java -version 
+docker run -it --rm -e JDK_IMPLEMENTATION=ORACLEJDK spalarus/java-kit java -version 
 Set JDK Implementation to OracleJDK
 java version "1.8.0_151"
 Java(TM) SE Runtime Environment (build 1.8.0_151-b12)
@@ -17,7 +17,7 @@ Java HotSpot(TM) 64-Bit Server VM (build 25.151-b12, mixed mode)
 
 Run container with OpenJDK
 ```bash
-docker run -it --rm -e JDK_IMPLEMENTATION=OPENJDK spalarus/centos-jdk-hybrid java -version 
+docker run -it --rm -e JDK_IMPLEMENTATION=OPENJDK spalarus/java-kit java -version 
 Set JDK Implementation to OpenJDK
 openjdk version "1.8.0_151"
 OpenJDK Runtime Environment (build 1.8.0_151-b12)
@@ -25,7 +25,7 @@ OpenJDK 64-Bit Server VM (build 25.151-b12, mixed mode)
 ```
 Switch implementation inside
 ```bash
-docker run -it --rm  spalarus/centos-jdk-hybrid
+docker run -it --rm  spalarus/java-kit
 
 [root@0d66589dee11 ~]# /bin/switch_jdk_impl.sh oraclejdk
 Set JDK Implementation to OracleJDK
