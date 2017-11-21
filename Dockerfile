@@ -22,6 +22,7 @@ RUN yum update -y && \
     yum install -y wget zip unzip vim sudo && \
     yum install -y git ant subversion && \
     yum install -y openssh-server openssh-clients && \
+    yum install -y xorg-x11-server-Xvfb  && \
     yum install -y ${RHEL_OPENJDK_PKG_NAME}-${RHEL_OPENJDK_VERSION} ${RHEL_OPENJDK_PKG_NAME}-devel-${RHEL_OPENJDK_VERSION} && \
     mkdir /opt/jdk && \
     ln -s /usr/lib/jvm/${RHEL_OPENJDK_PKG_NAME}-${RHEL_OPENJDK_VERSION}-${RHEL_OPENJDK_RELEASE}.x86_64 /opt/jdk/latest
@@ -93,7 +94,7 @@ RUN /bin/switch_mvn_impl.sh mvn35
 ENV HOME=/root
 ENV JAVA_HOME=/opt/jdk/latest
 ENV JRE_HOME=/opt/jdk/latest/jre 
-ENV JAVA_OPTS="-Djava.awt.headless=true"
+ENV JAVA_OPTS=
 ENV M2_HOME=/opt/mvn
 ENV JDK_IMPLEMENTATION=KEEP
 ENV MVN_IMPLEMENTATION=KEEP
@@ -102,6 +103,7 @@ ENV SSH_KEYGEN=false
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
+ENV XVFB=false
 
 # Define working directory.
 

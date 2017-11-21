@@ -20,6 +20,12 @@ then
     sudo /bin/switch_mvn_impl.sh mvn35
 fi
 
+if [ "${XVFB}" = "true" ]
+then
+    export DISPLAY="unix:99.0"
+    Xvfb :99 -screen 0 1x1x16 > /dev/null 2>&1 &
+fi
+
 if [ -f /var/opt/firstboot ]
 then
     sudo /sbin/initjdk.sh
