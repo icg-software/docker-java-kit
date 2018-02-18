@@ -4,6 +4,10 @@ This is docker image provides Oracle JDK and OpenJDK.
 
 **Using the image, you accept the [Oracle Binary Code License Agreement](http://www.oracle.com/technetwork/java/javase/terms/license/index.html) for Java SE!!!**
 
+### Source Repository
+
+@see on [GitHub](https://github.com/spalarus/docker-java-kit) ([Dockerfile](https://github.com/spalarus/docker-java-kit/blob/master/Dockerfile))
+
 ### Purpose
 
 * JRE
