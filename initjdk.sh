@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "first run"
+
 rm /var/opt/firstboot
 
 if [[ ! -z "${JENKINS_PWD}" ]]
@@ -21,10 +23,14 @@ then
     /usr/bin/ssh-keygen -A
 fi
 
+echo "A"
 if [[ ! -z "${JAVA_KIT_INIT_COMMAND}" ]]
 then
+    echo "B"
     if [ "${JAVA_KIT_INIT_COMMAND}" != "NONE" ]
     then
-        bash -c "${JAVA_KIT_INIT_COMMAND}"
+        echo "C"
+        echo "${JAVA_KIT_INIT_COMMAND}"
+        /bin/bash -c "${JAVA_KIT_INIT_COMMAND}"
     fi
 fi
