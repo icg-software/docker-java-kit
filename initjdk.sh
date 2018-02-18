@@ -20,3 +20,11 @@ then
     rm /etc/ssh/ssh_host_*
     /usr/bin/ssh-keygen -A
 fi
+
+if [[ ! -z "${JAVA_KIT_INIT_COMMAND}" ]]
+then
+    if [ "${JAVA_KIT_INIT_COMMAND}" != "NONE" ]
+    then
+        bash -c "${JAVA_KIT_INIT_COMMAND}"
+    fi
+fi
