@@ -61,6 +61,7 @@ RUN sed -ri "s/JAVA_VERSION_MAJOR=/JAVA_VERSION_MAJOR=${JAVA_VERSION_MAJOR}/g" /
 RUN chmod u+x /bin/switch_jdk_impl.sh && chmod u+x /bin/switch_mvn_impl.sh && \
                 chmod u+x /sbin/initjdk.sh &&  chmod u+x /entrypoint.sh && \
     echo 'Defaults    env_keep += "JENKINS_PWD SSH_KEYGEN"' >> /etc/sudoers.d/jdk && \
+    echo 'Defaults    env_keep += "JAVA_KIT_INIT_COMMAND"' >> /etc/sudoers.d/jdk && \
     echo "ALL ALL=(ALL) NOPASSWD:  /bin/switch_jdk_impl.sh" >> /etc/sudoers.d/jdk && \
     echo "ALL ALL=(ALL) NOPASSWD:  /bin/switch_mvn_impl.sh" >> /etc/sudoers.d/jdk && \
     echo "ALL ALL=(ALL) NOPASSWD:  /sbin/initjdk.sh" >> /etc/sudoers.d/jdk
