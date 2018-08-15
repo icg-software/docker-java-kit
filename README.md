@@ -22,7 +22,9 @@ This is docker image provides Oracle JDK and OpenJDK.
 * git
 * mvn (3.3 and 3.5)
 * ant 1.9
-* gradle 4.3
+* gradle 4.9
+* nodejs 8.11
+* npm 5.6
 
 ### Select java implementation 
 
@@ -33,9 +35,9 @@ docker run -it --rm \
     spalarus/java-kit java -version 
 
 Set JDK Implementation to OracleJDK
-java version "1.8.0_151"
-Java(TM) SE Runtime Environment (build 1.8.0_151-b12)
-Java HotSpot(TM) 64-Bit Server VM (build 25.151-b12, mixed mode)
+java version "1.8.0_181"
+Java(TM) SE Runtime Environment (build 1.8.0_181-b13)
+Java HotSpot(TM) 64-Bit Server VM (build 25.181-b13, mixed mode)
 ```
  
 **Run container with OpenJDK**
@@ -45,9 +47,9 @@ docker run -it --rm \
     spalarus/java-kit java -version 
 
 Set JDK Implementation to OpenJDK
-openjdk version "1.8.0_151"
-OpenJDK Runtime Environment (build 1.8.0_151-b12)
-OpenJDK 64-Bit Server VM (build 25.151-b12, mixed mode)
+openjdk version "1.8.0_181"
+OpenJDK Runtime Environment (build 1.8.0_181-b13)
+OpenJDK 64-Bit Server VM (build 25.181-b13, mixed mode)
 ```
  
 **Switch implementation inside**
@@ -57,16 +59,16 @@ docker run -it --rm  spalarus/java-kit
 [root@0d66589dee11 ~]# /bin/switch_jdk_impl.sh oraclejdk
 Set JDK Implementation to OracleJDK
 [root@0d66589dee11 ~]# java -version
-java version "1.8.0_151"
-Java(TM) SE Runtime Environment (build 1.8.0_151-b12)
-Java HotSpot(TM) 64-Bit Server VM (build 25.151-b12, mixed mode)
+java version "1.8.0_181"
+Java(TM) SE Runtime Environment (build 1.8.0_181-b13)
+Java HotSpot(TM) 64-Bit Server VM (build 25.181-b13, mixed mode)
 
 [root@0d66589dee11 ~]# /bin/switch_jdk_impl.sh openjdk
 Set JDK Implementation to OpenJDK
 [root@0d66589dee11 ~]# java -version
-openjdk version "1.8.0_151"
-OpenJDK Runtime Environment (build 1.8.0_151-b12)
-OpenJDK 64-Bit Server VM (build 25.151-b12, mixed mode)
+openjdk version "1.8.0_181"
+OpenJDK Runtime Environment (build 1.8.0_181-b13)
+OpenJDK 64-Bit Server VM (build 25.181-b13, mixed mode)
 ```
  
 ### Environment VARs

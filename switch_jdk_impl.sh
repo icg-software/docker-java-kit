@@ -10,10 +10,10 @@ RHEL_OPENJDK_RELEASE=
 case "$1" in
     oraclejdk)
         echo "Set JDK Implementation to OracleJDK"
-        alternatives --set javac /usr/java/jdk1.${JAVA_VERSION_MAJOR}.0_${JAVA_VERSION_MINOR}/bin/javac
-        alternatives --set java /usr/java/jdk1.${JAVA_VERSION_MAJOR}.0_${JAVA_VERSION_MINOR}/jre/bin/java
+        alternatives --set javac /usr/java/jdk1.${JAVA_VERSION_MAJOR}.0_${JAVA_VERSION_MINOR}-amd64/bin/javac
+        alternatives --set java /usr/java/jdk1.${JAVA_VERSION_MAJOR}.0_${JAVA_VERSION_MINOR}-amd64/jre/bin/java
         rm /opt/jdk/latest
-        ln -s /usr/java/jdk1.${JAVA_VERSION_MAJOR}.0_${JAVA_VERSION_MINOR} /opt/jdk/latest
+        ln -s /usr/java/jdk1.${JAVA_VERSION_MAJOR}.0_${JAVA_VERSION_MINOR}-amd64 /opt/jdk/latest
         ;;
 
     openjdk)

@@ -5,21 +5,22 @@ MAINTAINER spalarus <s.palarus@googlemail.com>
 # Set installation details
 
 ARG JAVA_VERSION_MAJOR=8
-ARG JAVA_VERSION_MINOR=161
-ARG JAVA_VERSION_BUILD=12
-ARG ORA_JAVA_URL_HASH=2f38c3b165be4555a1fa6e98c45e0808
+ARG JAVA_VERSION_MINOR=181
+ARG JAVA_VERSION_BUILD=13
+ARG ORA_JAVA_URL_HASH=96a7b8442fe848ef90c96a2fad6ed6d1
 ARG RHEL_OPENJDK_PKG_NAME=java-1.${JAVA_VERSION_MAJOR}.0-openjdk
 ARG RHEL_OPENJDK_VERSION=1.${JAVA_VERSION_MAJOR}.0.${JAVA_VERSION_MINOR}
-ARG RHEL_OPENJDK_RELEASE=0.b14.el7_4
+ARG RHEL_OPENJDK_RELEASE=3.b13.el7_5
 ARG MVN33_VERSION=3.3.9
-ARG MVN35_VERSION=3.5.2
+ARG MVN35_VERSION=3.5.4
 ARG APACHE_MIRROR=mirrors.sonic.net
-ARG GRADLE_VERSION=4.5.1
+ARG GRADLE_VERSION=4.9
+ARG LTS_NODEJS=8
 
 # complete RHEL installation
 
 RUN yum update -y && \
-    yum install -y wget zip unzip vim sudo && \
+    yum install -y wget curl zip unzip vim sudo && \
     yum install -y git ant subversion && \
     yum install -y openssh-server openssh-clients && \
     yum install -y xorg-x11-server-Xvfb  && \
@@ -82,7 +83,13 @@ RUN wget https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.
     unzip -d /usr/local gradle-${GRADLE_VERSION}-bin.zip && \
     ln -s /usr/local/gradle-${GRADLE_VERSION} /opt/gradle && \
     ln -s /opt/gradle/bin/gradle /usr/bin/gradle && \
-    rm gradle-${GRADLE_VERSION}-bin.zip
+    rm -f gradle-${GRADLE_VERSION}-bin.zip
+    
+# install nodejs / npm
+
+RUN curl -sL https://rpm.nodesource.com/setup_${LTS_NODEJS}.x | sudo bash - && \
+    yum install -y nodejs && \
+    yum install -y gcc-c++ make
 
 # switch to default settings
 
