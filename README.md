@@ -22,34 +22,34 @@ This is docker image provides Oracle JDK and OpenJDK.
 * git
 * mvn (3.3 and 3.5)
 * ant 1.9
-* gradle 4.9
-* nodejs 8.11
-* npm 5.6
+* gradle 4.10
+* nodejs 10.14
+* npm 6.4
 
 ### Select java implementation 
 
 **Run container with Oracle JDK**
 ```bash
 docker run -it --rm \
-    -e JDK_IMPLEMENTATION=ORACLEJDK 
+    -e JDK_IMPLEMENTATION=ORACLEJDK \
     spalarus/java-kit java -version 
 
 Set JDK Implementation to OracleJDK
-java version "1.8.0_181"
-Java(TM) SE Runtime Environment (build 1.8.0_181-b13)
-Java HotSpot(TM) 64-Bit Server VM (build 25.181-b13, mixed mode)
+java version "1.8.0_191"
+Java(TM) SE Runtime Environment (build 1.8.0_191-b12)
+Java HotSpot(TM) 64-Bit Server VM (build 25.191-b12, mixed mode)
 ```
  
 **Run container with OpenJDK**
 ```bash
 docker run -it --rm \
-    -e JDK_IMPLEMENTATION=OPENJDK 
+    -e JDK_IMPLEMENTATION=OPENJDK \
     spalarus/java-kit java -version 
 
 Set JDK Implementation to OpenJDK
-openjdk version "1.8.0_181"
-OpenJDK Runtime Environment (build 1.8.0_181-b13)
-OpenJDK 64-Bit Server VM (build 25.181-b13, mixed mode)
+openjdk version "1.8.0_191"
+OpenJDK Runtime Environment (build 1.8.0_191-b12)
+OpenJDK 64-Bit Server VM (build 25.191-b12, mixed mode)
 ```
  
 **Switch implementation inside**
@@ -59,16 +59,16 @@ docker run -it --rm  spalarus/java-kit
 [root@0d66589dee11 ~]# /bin/switch_jdk_impl.sh oraclejdk
 Set JDK Implementation to OracleJDK
 [root@0d66589dee11 ~]# java -version
-java version "1.8.0_181"
-Java(TM) SE Runtime Environment (build 1.8.0_181-b13)
-Java HotSpot(TM) 64-Bit Server VM (build 25.181-b13, mixed mode)
+java version "1.8.0_191"
+Java(TM) SE Runtime Environment (build 1.8.0_191-b12)
+Java HotSpot(TM) 64-Bit Server VM (build 25.191-b12, mixed mode)
 
 [root@0d66589dee11 ~]# /bin/switch_jdk_impl.sh openjdk
 Set JDK Implementation to OpenJDK
 [root@0d66589dee11 ~]# java -version
-openjdk version "1.8.0_181"
-OpenJDK Runtime Environment (build 1.8.0_181-b13)
-OpenJDK 64-Bit Server VM (build 25.181-b13, mixed mode)
+openjdk version "1.8.0_191"
+OpenJDK Runtime Environment (build 1.8.0_191-b12)
+OpenJDK 64-Bit Server VM (build 25.191-b12, mixed mode)
 ```
  
 ### Environment VARs
