@@ -20,6 +20,11 @@ then
     sudo /bin/switch_mvn_impl.sh mvn35
 fi
 
+if [ "${MVN_IMPLEMENTATION}" = "MVN36" ]
+then
+    sudo /bin/switch_mvn_impl.sh mvn36
+fi
+
 if [ "${XVFB}" = "true" ]
 then
     export DISPLAY="unix:99.0"

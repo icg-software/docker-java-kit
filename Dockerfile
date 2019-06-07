@@ -5,34 +5,31 @@ MAINTAINER spalarus <s.palarus@googlemail.com>
 # Set installation details
 
 ARG JAVA_VERSION_MAJOR=8
-ARG JAVA_VERSION_MINOR=191
-ARG JAVA_VERSION_BUILD=12
-ARG ORA_JAVA_URL_HASH=2787e4a523244c269598db4e85c51e0c
+ARG JAVA_VERSION_MINOR=201
+ARG JAVA_VERSION_BUILD=09
 ARG RHEL_OPENJDK_PKG_NAME=java-1.${JAVA_VERSION_MAJOR}.0-openjdk
-ARG RHEL_OPENJDK_VERSION=1.${JAVA_VERSION_MAJOR}.0.${JAVA_VERSION_MINOR}.b12
-ARG RHEL_OPENJDK_RELEASE=1.el7_6
+ARG RHEL_OPENJDK_VERSION=1.${JAVA_VERSION_MAJOR}.0.${JAVA_VERSION_MINOR}.b${JAVA_VERSION_BUILD}
+ARG RHEL_OPENJDK_RELEASE=2.el7_6
 ARG MVN33_VERSION=3.3.9
 ARG MVN35_VERSION=3.5.4
+ARG MVN36_VERSION=3.6.1
 ARG APACHE_MIRROR=mirrors.sonic.net
-ARG GRADLE_VERSION=4.10.3
+ARG GRADLE_VERSION=5.4.1
 ARG LTS_NODEJS=10
 
 # complete RHEL installation
 
 RUN yum update -y && \
-    yum install -y wget curl zip unzip vim sudo && \
-    yum install -y git ant subversion && \
-    yum install -y openssh-server openssh-clients && \
-    yum install -y xorg-x11-server-Xvfb  && \
+    yum install -y wget curl zip unzip vim sudo openssh-server openssh-clients org-x11-server-Xvfb && \
     yum install -y ${RHEL_OPENJDK_PKG_NAME}-${RHEL_OPENJDK_VERSION} ${RHEL_OPENJDK_PKG_NAME}-devel-${RHEL_OPENJDK_VERSION} && \
     mkdir /opt/jdk && \
-    ln -s /usr/lib/jvm/${RHEL_OPENJDK_PKG_NAME}-${RHEL_OPENJDK_VERSION}-${RHEL_OPENJDK_RELEASE}.x86_64 /opt/jdk/latest
+    ln -s /usr/lib/jvm/${RHEL_OPENJDK_PKG_NAME}-${RHEL_OPENJDK_VERSION}-2.${RHEL_OPENJDK_RELEASE}.x86_64 /opt/jdk/latest && \
+    yum install -y git ant subversion
 
 # install oracle jdk  
 
-RUN wget --no-cookies --no-check-certificate \
-    --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2Ftechnetwork%2Fjava%2Fjavase%2Fdownloads%2Fjdk8-downloads-2133151.html; oraclelicense=accept-securebackup-cookie" \
-    "http://download.oracle.com/otn-pub/java/jdk/${JAVA_VERSION_MAJOR}u${JAVA_VERSION_MINOR}-b${JAVA_VERSION_BUILD}/${ORA_JAVA_URL_HASH}/jdk-${JAVA_VERSION_MAJOR}u${JAVA_VERSION_MINOR}-linux-x64.rpm" && \
+RUN wget https://github.com/frekele/oracle-java/releases/download/${JAVA_VERSION_MAJOR}u${JAVA_VERSION_MINOR}-b${JAVA_VERSION_BUILD}/jdk-${JAVA_VERSION_MAJOR}u${JAVA_VERSION_MINOR}-linux-x64.rpm && \
+    md5sum  jdk-${JAVA_VERSION_MAJOR}u${JAVA_VERSION_MINOR}-linux-x64.rpm > /root/jdk-${JAVA_VERSION_MAJOR}u${JAVA_VERSION_MINOR}-linux-x64.rpm.md5 && \ 
     yum localinstall -y jdk-${JAVA_VERSION_MAJOR}u${JAVA_VERSION_MINOR}-linux-x64.rpm && \
     rm -f jdk-${JAVA_VERSION_MAJOR}u${JAVA_VERSION_MINOR}-linux-x64.rpm
 
@@ -57,7 +54,8 @@ RUN sed -ri "s/JAVA_VERSION_MAJOR=/JAVA_VERSION_MAJOR=${JAVA_VERSION_MAJOR}/g" /
     sed -ri "s/RHEL_OPENJDK_VERSION=/RHEL_OPENJDK_VERSION=${RHEL_OPENJDK_VERSION}/g" /bin/switch_jdk_impl.sh && \
     sed -ri "s/RHEL_OPENJDK_RELEASE=/RHEL_OPENJDK_RELEASE=${RHEL_OPENJDK_RELEASE}/g" /bin/switch_jdk_impl.sh && \
     sed -ri "s/MVN33_VERSION=/MVN33_VERSION=${MVN33_VERSION}/g" /bin/switch_mvn_impl.sh && \
-    sed -ri "s/MVN35_VERSION=/MVN35_VERSION=${MVN35_VERSION}/g" /bin/switch_mvn_impl.sh
+    sed -ri "s/MVN35_VERSION=/MVN35_VERSION=${MVN35_VERSION}/g" /bin/switch_mvn_impl.sh && \
+    sed -ri "s/MVN36_VERSION=/MVN36_VERSION=${MVN36_VERSION}/g" /bin/switch_mvn_impl.sh
 
 RUN chmod u+x /bin/switch_jdk_impl.sh && chmod u+x /bin/switch_mvn_impl.sh && \
                 chmod u+x /sbin/initjdk.sh &&  chmod u+x /entrypoint.sh && \
@@ -75,7 +73,11 @@ RUN wget http://${APACHE_MIRROR}/apache/maven/maven-3/${MVN33_VERSION}/binaries/
     wget http://${APACHE_MIRROR}/apache/maven/maven-3/${MVN35_VERSION}/binaries/apache-maven-${MVN35_VERSION}-bin.tar.gz && \
     tar -zxf apache-maven-${MVN35_VERSION}-bin.tar.gz && \
     tar -C /usr/local -xzf apache-maven-${MVN35_VERSION}-bin.tar.gz && \
-    rm -f apache-maven-${MVN35_VERSION}-bin.tar.gz
+    rm -f apache-maven-${MVN35_VERSION}-bin.tar.gz && \
+    wget http://${APACHE_MIRROR}/apache/maven/maven-3/${MVN36_VERSION}/binaries/apache-maven-${MVN36_VERSION}-bin.tar.gz && \
+    tar -zxf apache-maven-${MVN36_VERSION}-bin.tar.gz && \
+    tar -C /usr/local -xzf apache-maven-${MVN36_VERSION}-bin.tar.gz && \
+    rm -f apache-maven-${MVN36_VERSION}-bin.tar.gz
     
 # install gradle
 
