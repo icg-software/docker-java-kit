@@ -20,10 +20,10 @@ This is docker image provides Oracle JDK and OpenJDK.
 * vi
 * subversion
 * git
-* mvn (3.3, 3.5, 3.6)
+* mvn (3.8, 3.9)
 * ant 1.9
-* gradle 5.4.1
-* nodejs 10.16
+* gradle 8.13
+* nodejs 22
 * npm 6.9
 
 ### Select java implementation 
@@ -35,8 +35,8 @@ docker run -it --rm \
     spalarus/java-kit java -version 
 
 Set JDK Implementation to OracleJDK
-java version "1.8.0_201"
-Java(TM) SE Runtime Environment (build 1.8.0_201-b09)
+java version "1.8.0_442"
+Java(TM) SE Runtime Environment (build 1.8.0_442-b14)
 Java HotSpot(TM) 64-Bit Server VM (build 25.201-b09, mixed mode)
 ```
  
@@ -47,9 +47,9 @@ docker run -it --rm \
     spalarus/java-kit java -version 
 
 Set JDK Implementation to OpenJDK
-openjdk version "1.8.0_201"
-OpenJDK Runtime Environment (build 1.8.0_201-b09)
-OpenJDK 64-Bit Server VM (build 25.201-b09, mixed mode)
+openjdk version "1.8.0_442"
+OpenJDK Runtime Environment (build 1.8.0_442-b14)
+OpenJDK 64-Bit Server VM (build 25.442-b14, mixed mode)
 ```
  
 **Switch implementation inside**
@@ -59,16 +59,16 @@ docker run -it --rm  spalarus/java-kit
 [root@0d66589dee11 ~]# /bin/switch_jdk_impl.sh oraclejdk
 Set JDK Implementation to OracleJDK
 [root@0d66589dee11 ~]# java -version
-java version "1.8.0_201"
-Java(TM) SE Runtime Environment (build 1.8.0_201-b09)
-Java HotSpot(TM) 64-Bit Server VM (build 25.201-b09, mixed mode)
+java version "1.8.0_442"
+Java(TM) SE Runtime Environment (build 1.8.0_442-b14)
+Java HotSpot(TM) 64-Bit Server VM (build 25.442-b14, mixed mode)
 
 [root@0d66589dee11 ~]# /bin/switch_jdk_impl.sh openjdk
 Set JDK Implementation to OpenJDK
 [root@0d66589dee11 ~]# java -version
-openjdk version "1.8.0_201"
-OpenJDK Runtime Environment (build 1.8.0_201-b09)
-OpenJDK 64-Bit Server VM (build 25.201-b09, mixed mode)
+openjdk version "1.8.0_442"
+OpenJDK Runtime Environment (build 1.8.0_442-b14)
+OpenJDK 64-Bit Server VM (build 25.442-b14, mixed mode)
 ```
  
 ### Environment VARs
@@ -76,7 +76,7 @@ OpenJDK 64-Bit Server VM (build 25.201-b09, mixed mode)
 | VAR                  | Description                                   | Value                       |
 |----------------------|-----------------------------------------------|-----------------------------|
 | JDK_IMPLEMENTATION   | switch selecting JDK                          | ORACLEJDK / OPENJDK         |
-| MVN_IMPLEMENTATION   | switch for MVN-Version                        | MVN33 / MVN35 / MVN36       |
+| MVN_IMPLEMENTATION   | switch for MVN-Version                        | MVN38 / MVN39       |
 | JENKINS_PWD          | create User jenkins (first start / uid 1000)  | password for jenkins usr    |
 | SSH_KEYGEN           | generate new hostkey (first start)            | true / false                |
 
