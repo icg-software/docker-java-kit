@@ -1,6 +1,6 @@
 FROM oraclelinux:9
 
-MAINTAINER jliepe <j_liepe@icg-software.de>
+LABEL maintainer="jliepe <j_liepe@icg-software.de>"
 
 # Set installation details
 
