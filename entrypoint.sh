@@ -10,19 +10,14 @@ then
     sudo /bin/switch_jdk_impl.sh oraclejdk
 fi
 
-if [ "${MVN_IMPLEMENTATION}" = "MVN33" ]
+if [ "${MVN_IMPLEMENTATION}" = "MVN38" ]
 then
-    sudo /bin/switch_mvn_impl.sh mvn33
+    sudo /bin/switch_mvn_impl.sh mvn38
 fi
 
-if [ "${MVN_IMPLEMENTATION}" = "MVN35" ]
+if [ "${MVN_IMPLEMENTATION}" = "MVN39" ]
 then
-    sudo /bin/switch_mvn_impl.sh mvn35
-fi
-
-if [ "${MVN_IMPLEMENTATION}" = "MVN36" ]
-then
-    sudo /bin/switch_mvn_impl.sh mvn36
+    sudo /bin/switch_mvn_impl.sh mvn39
 fi
 
 if [ "${XVFB}" = "true" ]
