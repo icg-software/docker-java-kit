@@ -1,4 +1,4 @@
-FROM oraclelinux:9
+FROM almalinux:9.5-minimal
 
 LABEL maintainer="jliepe <j_liepe@icg-software.de>"
 
@@ -18,23 +18,23 @@ ARG LTS_NODEJS=22
 
 # complete RHEL installation
 
-RUN dnf update -y && \
-    dnf install -y wget curl zip unzip vim sudo openssh-server openssh-clients && \
-    dnf install -y ${RHEL_OPENJDK_PKG_NAME}-${RHEL_OPENJDK_VERSION} ${RHEL_OPENJDK_PKG_NAME}-devel-${RHEL_OPENJDK_VERSION} && \
+RUN microdnf update -y && \
+    microdnf install -y wget tar zip unzip vim sudo openssh-server openssh-clients && \
+    microdnf install -y ${RHEL_OPENJDK_PKG_NAME}-${RHEL_OPENJDK_VERSION} ${RHEL_OPENJDK_PKG_NAME}-devel-${RHEL_OPENJDK_VERSION} && \
     mkdir /opt/jdk && \
     ln -s /usr/lib/jvm/${RHEL_OPENJDK_PKG_NAME}-${RHEL_OPENJDK_VERSION}-2.${RHEL_OPENJDK_RELEASE}.x86_64 /opt/jdk/latest && \
-    dnf install -y git ant subversion
+    microdnf install -y git ant subversion
 
 # install oracle jdk  
 
 #RUN wget https://github.com/frekele/oracle-java/releases/download/${JAVA_VERSION_MAJOR}u${JAVA_VERSION_MINOR}-b${JAVA_VERSION_BUILD}/jdk-${JAVA_VERSION_MAJOR}u${JAVA_VERSION_MINOR}-linux-x64.rpm && \
 #    md5sum  jdk-${JAVA_VERSION_MAJOR}u${JAVA_VERSION_MINOR}-linux-x64.rpm > /root/jdk-${JAVA_VERSION_MAJOR}u${JAVA_VERSION_MINOR}-linux-x64.rpm.md5 && \ 
-#    dnf localinstall -y jdk-${JAVA_VERSION_MAJOR}u${JAVA_VERSION_MINOR}-linux-x64.rpm && \
+#    microdnf localinstall -y jdk-${JAVA_VERSION_MAJOR}u${JAVA_VERSION_MINOR}-linux-x64.rpm && \
 #    rm -f jdk-${JAVA_VERSION_MAJOR}u${JAVA_VERSION_MINOR}-linux-x64.rpm
 
 # clean rpm/dnf and prepare for first start
 
-RUN dnf clean all && \
+RUN microdnf clean all && \
     rm -rf /var/cache/dnf && \
     touch /var/opt/firstboot && \
     /usr/bin/ssh-keygen -A
@@ -84,8 +84,8 @@ RUN wget https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.
 # install nodejs / npm
 
 RUN curl -sL https://rpm.nodesource.com/setup_${LTS_NODEJS}.x | sudo bash - && \
-    dnf install -y nodejs && \
-    dnf install -y gcc-c++ make
+    microdnf install -y nodejs && \
+    microdnf install -y gcc-c++ make
 
 # switch to default settings
 
